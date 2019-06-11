@@ -22,7 +22,7 @@ work/
 
 # *.yaml.tmpl is templated by make
 skaffold.yaml
-kustomize.yaml
+kustomization.yaml
 
 # make manifests (kustomize generated code)
-generated_manifests.yaml
+kustomize_generated_manifest.yaml
