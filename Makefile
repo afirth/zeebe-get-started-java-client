@@ -5,8 +5,8 @@ SHELL = /bin/bash
 
 export GCLOUD_PROJECT := $(shell gcloud config get-value project 2>/dev/null)
 
-templated = "kustomization.yaml \
-            skaffold.yaml"
+templated = kustomization.yaml \
+            skaffold.yaml
 
 .PHONY: all
 all: kustomize
