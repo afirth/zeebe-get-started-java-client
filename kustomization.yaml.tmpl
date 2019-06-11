@@ -9,10 +9,10 @@ commonLabels:
   app.kubernetes.io/env: demo
 
 bases:
-  - ./worker
+  - ./worker/deployment.yaml
 
 images:
-  - name: zeebe-client
+  - name: zeebe-get-started-java-client
     newName: gcr.io/${GCLOUD_PROJECT}/zeebe-get-started-java-client
     #skaffold will overwrite this, otherwise you should explicitly set it
     newTag: latest

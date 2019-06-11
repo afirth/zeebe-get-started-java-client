@@ -9,14 +9,14 @@ spec:
       labels:
         app.kubernetes.io/app: zeebe-get-started-java-client
     spec:
-      volumes:
-        - name: config
-          configMap:
-            name: config
-            defaultMode: 0744
       containers:
         - name: zeebe-get-started-java-client
           image: zeebe-get-started-java-client
+          command: [ "java" ]
+          args:
+            - -jar
+            - /usr/src/zeebe-worker.jar
+            - $(ZEEBE_SERVICE_HOST):$(ZEEBE_SERVICE_PORT_GATEWAY)
           resources:
             requests:
               cpu: 300m
