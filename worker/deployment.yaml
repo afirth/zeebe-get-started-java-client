@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeebe-client
+spec:
+  selector: {}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/app: zeebe-get-started-java-client
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: config
+            defaultMode: 0744
+      containers:
+        - name: zeebe-get-started-java-client
+          image: zeebe-get-started-java-client
+          resources:
+            requests:
+              cpu: 300m
+              memory: 512Mi
+            limits:
+              memory: 512Mi

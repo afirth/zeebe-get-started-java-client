@@ -11,9 +11,6 @@ commonLabels:
 bases:
   - ./worker
 
-resources:
-  - namespace.yaml
-
 images:
   - name: zeebe-client
     newName: gcr.io/${GCLOUD_PROJECT}/zeebe-get-started-java-client

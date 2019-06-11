@@ -5,7 +5,7 @@ SHELL = /bin/bash
 
 export GCLOUD_PROJECT := $(shell gcloud config get-value project 2>/dev/null)
 
-templated = kustomization.yaml \
+templates = kustomization.yaml \
             skaffold.yaml
 manifest = kustomize_generated_manifest.yaml
 
@@ -14,23 +14,23 @@ all: kustomize
 
 .PHONY: clean
 clean:
-	rm -f $(templated) $(manifest)
+	rm $(templates) $(manifest)
 
 #runs kustomize to make one big yaml manifest
-.PHONY: manifests
-manifests: $(templated)
+.PHONY: manifest
+manifest: $(templates)
 	kustomize build > $(manifest)
 
 #runs kubectl apply on the generated manifest
 .PHONY: apply
-apply: manifests $(templated)
+apply: manifests $(templates)
 	kubectl apply -f $(manifest)
 
 #runs skaffold
 .PHONY: skaffold
-skaffold: $(templated)
+skaffold: $(templates)
 	skaffold run
 
 #calls envsubst to replace things like GCLOUD_PROJECT
-$(templated): %.yaml: %.yaml.tmpl
+$(templates): %.yaml: %.yaml.tmpl
 	envsubst < $^ > $@
